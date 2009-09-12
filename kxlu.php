@@ -1,58 +1,17 @@
-<!--
-<html>
-<form method="get" action="kxlu.php">
-<input type="text" name="q">
-<input type="submit" value="q">
-</form>
--->
-<style>
-body {
-font-family:"Helvetica Neue";helvetica;
-}
-table tr {
-vertical-align:top;
-}
-h2 {
-font-size:14px;
-font-weight:bold;
-padding:0;
-padding-bottom:2px;
-}
-table tr td {
-background-color:#f0f0f0;
-}
-
-td.title {
-width:230px;
-padding:15px;
-}
-td.embed {
-width:230px;
-padding:15px;
-}
-p.date {
-font-size:10px;
-padding:0;
-margin:0;
-}
-</style>
-<title>My KXLU Player</title>
-<h1>My KXLU Player</h1>
-
-<table>
-
 <?php
-
-//error_reporting(0);
 
 /**
 *
 *  +-+-+ +-+-+-+-+ +-+-+-+-+-+-+
-*  |M|Y| |K|X|L|U| |P|L|A|Y|E|R| by al shaw
+*  |M|Y| |K|X|L|U| |P|L|A|Y|E|R| by al shaw v0.01
 *  +-+-+ +-+-+-+-+ +-+-+-+-+-+-+
 *   8 8 . 9   f m   L A     C A  
 *
 **/
+
+//error_reporting(0);
+
+include 'topmatter.html';
 
 //pagination
 if(!isset($_GET['p'])) {
@@ -106,7 +65,7 @@ foreach ($kxlu->entry as $stream) {
 	echo "<h2>" . $song . "</h2>";
 	
 	/*
-	$date = mktime($stream->published);
+	$date = strtotime($stream->published);
 	
 	$date = date('d/m/y h:m',$date);
 	*/
@@ -145,39 +104,6 @@ foreach ($kxlu->entry as $stream) {
 	
 	}
 
+include 'bottommatter.html'; //js
 
 ?>
-</table>
-
-
-<h2><a href="kxlu.php?p=<?php echo "$nextpage"; ?>">Next Page</a></h2>
-
-<script type="text/javascript">
-//yt js api
-
-var i = 1;
-var currentPlayer = "player" + i;
-//var nextPlayer = "player" + (i + 1);
-
-function onYouTubePlayerReady(playerId) {
-  ytplayer = document.getElementById(currentPlayer);
-  ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
-}
-
-function incrementAndPlayVideo() {
-	currentPlayer = "player" + (i + 1);
-	ytplayer.playVideo();
-}
-
-function onytplayerStateChange(state) {
-  
-   if (state == 0) {
-   ytplayer = document.getElementById(currentPlayer);
-   incrementAndPlayVideo();
-   }
-}
-
-
-
-
-</script>

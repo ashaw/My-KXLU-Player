@@ -1,0 +1,36 @@
+</table>
+
+
+<h2><a href="kxlu.php?p=<?php echo "$nextpage"; ?>">Next Page</a></h2>
+
+<script type="text/javascript">
+//yt js api
+
+var i = 1;
+var currentPlayer = "player" + i;
+//var nextPlayer = "player" + (i + 1);
+
+function onYouTubePlayerReady(playerId) {
+  ytplayer = document.getElementById(currentPlayer);
+  ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
+}
+
+function incrementAndPlayVideo() {
+	currentPlayer = "player" + (i + 1);
+	ytplayer.playVideo();
+}
+
+function onytplayerStateChange(state) {
+  
+   if (state == 0) {
+   ytplayer = document.getElementById(currentPlayer);
+   incrementAndPlayVideo();
+   }
+}
+
+
+
+
+</script>
+</body>
+</html>

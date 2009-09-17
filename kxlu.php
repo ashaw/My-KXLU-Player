@@ -11,6 +11,8 @@
 
 //error_reporting(0);
 
+$version = '0.02';
+
 include 'topmatter.html';
 
 //pagination
@@ -81,7 +83,7 @@ foreach ($kxlu->entry as $stream) {
 	
 	//get the youtube vid associated with song
 	
-	$yt = file_get_contents("http://gdata.youtube.com/feeds/api/videos?q=$song&orderby=relevance&max-results=1&v=2&alt=atom&prettyprint=true");
+	$yt = file_get_contents("http://gdata.youtube.com/feeds/api/videos?q=$song&orderby=relevance&max-results=1&v=2&alt=atom");
 	$yt = new simpleXMLelement($yt);
 	
 	//autoplay?
@@ -94,13 +96,14 @@ foreach ($kxlu->entry as $stream) {
 	foreach ($yt->entry->content as $content) {
 	
 		$url = $content['src'];
-		echo "<embed src=\"$url&enablejsapi=1$autoplay\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"212\" height=\"172\" id=\"player$count\"></embed>";
+		echo "<embed src=\"$url&enablejsapi=1&playerapiid=player$count$autoplay\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"212\" height=\"172\" id=\"player$count\"></embed>";
  
 		}
 	
 	echo '</td>';
 	
 	echo '</tr>';
+	
 	
 	}
 

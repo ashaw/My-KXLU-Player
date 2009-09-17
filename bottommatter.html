@@ -6,24 +6,35 @@
 <script type="text/javascript">
 //yt js api
 
-var i = 1;
-var currentPlayer = "player" + i;
-//var nextPlayer = "player" + (i + 1);
+var i = 1
+playerId = "player" + i;
 
 function onYouTubePlayerReady(playerId) {
-  ytplayer = document.getElementById(currentPlayer);
+  ytplayer = document.getElementById(playerId);
   ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
 }
 
 function incrementAndPlayVideo() {
-	currentPlayer = "player" + (i + 1);
+	playerId = "player" + (i + 1);
+		
+		if (playerId == ("player" + 22)) { //last on page+2
+			
+			//last player finish on page redirects to next page
+			window.location='kxlu.php?p=<?php echo "$nextpage"; ?>'; 
+			
+			}
+			
 	ytplayer.playVideo();
-}
-
+	
+	i++; //increment the counter and playerId
+	
+		
+	}
+	
 function onytplayerStateChange(state) {
   
    if (state == 0) {
-   ytplayer = document.getElementById(currentPlayer);
+   ytplayer = document.getElementById(playerId);
    incrementAndPlayVideo();
    }
 }
@@ -32,5 +43,7 @@ function onytplayerStateChange(state) {
 
 
 </script>
+
+<p><?php echo 'v' . $version ?></p>
 </body>
 </html>
